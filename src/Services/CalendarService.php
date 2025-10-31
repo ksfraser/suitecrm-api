@@ -34,6 +34,7 @@ namespace SuiteAPI\Services;
 use SuiteAPI\Interfaces\SuiteCrmApiInterface;
 use SuiteAPI\Exceptions\SuiteApiException;
 use SuiteAPI\Exceptions\ValidationException;
+use Exception;
 
 /**
  * Calendar Service
@@ -183,9 +184,6 @@ class CalendarService extends BaseSuiteCrmService
      */
     public function syncFromNextcloud(string $nextcloudUrl, string $username, string $password, string $calendarId, string $since): array
     {
-        // This would implement CalDAV sync from Nextcloud
-        // For now, return a placeholder structure
-
         $results = [
             'synced_events' => 0,
             'created_events' => 0,
@@ -195,12 +193,61 @@ class CalendarService extends BaseSuiteCrmService
             'errors' => []
         ];
 
-        // TODO: Implement actual CalDAV sync logic
-        // 1. Connect to Nextcloud CalDAV
-        // 2. Fetch events since last sync
-        // 3. Map to SuiteCRM format
-        // 4. Create/update/delete events
-        // 5. Handle conflicts based on configuration
+        try {
+            // NOTE: Actual CalDAV implementation requires external libraries like 'sabre/dav'
+            // For now, throw an exception indicating this requirement
+            throw new SuiteApiException(
+                "CalDAV sync requires external CalDAV library. " .
+                "Install 'sabre/dav' or similar CalDAV client library to enable sync functionality."
+            );
+
+            // Placeholder for future implementation:
+            // $caldav = new CalDAVClient($nextcloudUrl, $username, $password);
+
+            // Get calendar events since last sync
+            $externalEvents = $caldav->getEvents($calendarId, $since);
+
+            foreach ($externalEvents as $externalEvent) {
+                try {
+                    // Map external event to SuiteCRM format
+                    $suiteEvent = $this->mapEventFromExternal($externalEvent, 'nextcloud');
+
+                    // Check if event already exists (by external ID or similar matching)
+                    $existingEvent = $this->findEventByExternalId($externalEvent['id'], 'nextcloud');
+
+                    if ($existingEvent) {
+                        // Check for conflicts
+                        if ($this->hasConflicts($existingEvent, $suiteEvent)) {
+                            $results['conflicts']++;
+                            // Handle conflict based on configuration
+                            if ($this->syncConfig['conflict_resolution'] === 'nextcloud_wins') {
+                                $this->update($existingEvent['id'], $suiteEvent);
+                                $results['updated_events']++;
+                            }
+                            // If suitecrm_wins, do nothing (keep existing)
+                        } else {
+                            // No conflict, update
+                            $this->update($existingEvent['id'], $suiteEvent);
+                            $results['updated_events']++;
+                        }
+                    } else {
+                        // Create new event
+                        $this->createCalendarEntry($suiteEvent);
+                        $results['created_events']++;
+                    }
+
+                    $results['synced_events']++;
+                } catch (Exception $e) {
+                    $results['errors'][] = "Failed to sync event {$externalEvent['id']}: " . $e->getMessage();
+                }
+            }
+
+            // Update last sync timestamp
+            $this->syncConfig['last_sync'] = date('c');
+
+        } catch (Exception $e) {
+            throw new SuiteApiException("CalDAV sync failed: " . $e->getMessage());
+        }
 
         return $results;
     }
@@ -220,9 +267,6 @@ class CalendarService extends BaseSuiteCrmService
      */
     public function syncToNextcloud(string $nextcloudUrl, string $username, string $password, string $calendarId, string $since): array
     {
-        // This would implement CalDAV sync to Nextcloud
-        // For now, return a placeholder structure
-
         $results = [
             'synced_events' => 0,
             'created_events' => 0,
@@ -232,11 +276,61 @@ class CalendarService extends BaseSuiteCrmService
             'errors' => []
         ];
 
-        // TODO: Implement actual CalDAV sync logic
-        // 1. Fetch SuiteCRM events since last sync
-        // 2. Map to CalDAV format
-        // 3. Create/update/delete events in Nextcloud
-        // 4. Handle conflicts based on configuration
+        try {
+            // NOTE: Actual CalDAV implementation requires external libraries like 'sabre/dav'
+            // For now, throw an exception indicating this requirement
+            throw new SuiteApiException(
+                "CalDAV sync requires external CalDAV library. " .
+                "Install 'sabre/dav' or similar CalDAV client library to enable sync functionality."
+            );
+
+            // Placeholder for future implementation:
+            // $caldav = new CalDAVClient($nextcloudUrl, $username, $password);
+
+            // Get SuiteCRM events since last sync
+            $suiteEvents = $this->getCalendarEvents($since, date('Y-m-d H:i:s', strtotime('+1 year')), null);
+
+            foreach ($suiteEvents as $suiteEvent) {
+                try {
+                    // Map SuiteCRM event to external format
+                    $externalEvent = $this->mapEventToExternal($suiteEvent, 'nextcloud');
+
+                    // Check if event exists in Nextcloud
+                    $existingExternalEvent = $caldav->getEvent($calendarId, $suiteEvent['id']);
+
+                    if ($existingExternalEvent) {
+                        // Check for conflicts
+                        if ($this->hasExternalConflicts($existingExternalEvent, $externalEvent)) {
+                            $results['conflicts']++;
+                            // Handle conflict based on configuration
+                            if ($this->syncConfig['conflict_resolution'] === 'suitecrm_wins') {
+                                $caldav->updateEvent($calendarId, $suiteEvent['id'], $externalEvent);
+                                $results['updated_events']++;
+                            }
+                            // If nextcloud_wins, do nothing (keep external)
+                        } else {
+                            // No conflict, update
+                            $caldav->updateEvent($calendarId, $suiteEvent['id'], $externalEvent);
+                            $results['updated_events']++;
+                        }
+                    } else {
+                        // Create new event in Nextcloud
+                        $caldav->createEvent($calendarId, $externalEvent);
+                        $results['created_events']++;
+                    }
+
+                    $results['synced_events']++;
+                } catch (Exception $e) {
+                    $results['errors'][] = "Failed to sync event {$suiteEvent['id']}: " . $e->getMessage();
+                }
+            }
+
+            // Update last sync timestamp
+            $this->syncConfig['last_sync'] = date('c');
+
+        } catch (Exception $e) {
+            throw new SuiteApiException("CalDAV sync to Nextcloud failed: " . $e->getMessage());
+        }
 
         return $results;
     }
@@ -276,6 +370,73 @@ class CalendarService extends BaseSuiteCrmService
         $this->syncConfig['last_sync'] = $combinedResults['sync_timestamp'];
 
         return $combinedResults;
+    }
+
+    /**
+     * Find event by external ID
+     *
+     * @param string $externalId External system event ID
+     * @param string $sourceSystem Source system name
+     * @return array|null SuiteCRM event data
+     */
+    private function findEventByExternalId(string $externalId, string $sourceSystem): ?array
+    {
+        // Search for events with matching external ID
+        // This assumes there's a field or relationship for external IDs
+        $criteria = [
+            'external_id' => $externalId,
+            'external_system' => $sourceSystem
+        ];
+
+        $events = $this->search($criteria, [], 1);
+        return $events[0] ?? null;
+    }
+
+    /**
+     * Check if there are conflicts between SuiteCRM and external events
+     *
+     * @param array $suiteEvent SuiteCRM event
+     * @param array $externalEvent Mapped external event
+     * @return bool True if conflicts exist
+     */
+    private function hasConflicts(array $suiteEvent, array $externalEvent): bool
+    {
+        // Compare key fields for conflicts
+        $conflictFields = ['name', 'date_start', 'date_end', 'description'];
+
+        foreach ($conflictFields as $field) {
+            if (isset($suiteEvent[$field]) && isset($externalEvent[$field])) {
+                // Simple string comparison - could be enhanced with date parsing, etc.
+                if ($suiteEvent[$field] !== $externalEvent[$field]) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Check if there are conflicts between external events
+     *
+     * @param array $existingExternal Existing external event
+     * @param array $newExternal New external event
+     * @return bool True if conflicts exist
+     */
+    private function hasExternalConflicts(array $existingExternal, array $newExternal): bool
+    {
+        // Compare key fields for conflicts
+        $conflictFields = ['summary', 'start', 'end', 'description'];
+
+        foreach ($conflictFields as $field) {
+            if (isset($existingExternal[$field]) && isset($newExternal[$field])) {
+                if ($existingExternal[$field] !== $newExternal[$field]) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     /**

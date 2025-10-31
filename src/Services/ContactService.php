@@ -301,4 +301,21 @@ class ContactService
             ]
         ];
     }
+
+    /**
+     * Get relationship fields for validation
+     *
+     * @return array Map of field names to module names
+     */
+    protected function getRelationshipFields(): array
+    {
+        return [
+            'assigned_user_id' => 'User',
+            'created_by' => 'User',
+            'modified_user_id' => 'User',
+            'account_id' => 'Accounts',
+            'reports_to_id' => 'Contacts',
+            'campaign_id' => 'Campaign'
+        ];
+    }
 }

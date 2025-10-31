@@ -376,4 +376,21 @@ class OpportunityService extends BaseSuiteCrmService
 
         return $defaultProbabilities[$salesStage] ?? 0;
     }
+
+    /**
+     * Get relationship fields for validation
+     *
+     * @return array Map of field names to module names
+     */
+    protected function getRelationshipFields(): array
+    {
+        return [
+            'assigned_user_id' => 'User',
+            'created_by' => 'User',
+            'modified_user_id' => 'User',
+            'account_id' => 'Accounts',
+            'contact_id' => 'Contacts',
+            'campaign_id' => 'Campaign'
+        ];
+    }
 }

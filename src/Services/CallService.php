@@ -251,4 +251,19 @@ class CallService extends ActivityService
 
         return $this->update($callId, $updateData);
     }
+
+    /**
+     * Get relationship fields for validation
+     *
+     * @return array Map of field names to module names
+     */
+    protected function getRelationshipFields(): array
+    {
+        return [
+            'assigned_user_id' => 'User',
+            'created_by' => 'User',
+            'modified_user_id' => 'User',
+            'parent_id' => 'Accounts' // Can be various parent types
+        ];
+    }
 }

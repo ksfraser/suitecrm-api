@@ -321,11 +321,11 @@ class EmailTemplatesService extends BaseSuiteCrmService
      * @param string $templateId Template ID
      * @param string $testEmail Test email address
      * @param array $testData Test data for variable replacement
-     * @return bool True on success
+     * @return array Test results with processed content
      * @throws ValidationException
      * @throws SuiteApiException
      */
-    public function sendTestEmail(string $templateId, string $testEmail, array $testData = []): bool
+    public function sendTestEmail(string $templateId, string $testEmail, array $testData = []): array
     {
         $template = $this->findTemplateById($templateId);
         if (!$template) {
@@ -350,17 +350,31 @@ class EmailTemplatesService extends BaseSuiteCrmService
         $mergeData = array_merge($defaultTestData, $testData);
 
         // Replace variables in subject and body
-        $subject = $this->replaceVariables($template['subject'], $mergeData);
-        $body = $this->replaceVariables($template['body'], $mergeData);
+        $processedSubject = $this->replaceVariables($template['subject'], $mergeData);
+        $processedBody = $this->replaceVariables($template['body'], $mergeData);
 
-        // Use EmailService to send the test email
+        // Log the test email instead of sending
+        $emailData = [
+            'name' => 'Test: ' . $template['name'],
+            'type' => 'out',
+            'status' => 'sent',
+            'from_addr' => 'test@example.com',
+            'to_addrs' => $testEmail,
+            'subject' => $processedSubject,
+            'body' => $processedBody,
+            'description' => 'Test email from template validation'
+        ];
+
         $emailService = new EmailService($this->api);
-        return $emailService->sendEmail([
-            'to' => [$testEmail],
-            'subject' => $subject,
-            'body' => $body,
-            'body_type' => strpos($body, '<') !== false ? 'html' : 'text'
-        ]);
+        $emailId = $emailService->logSentEmail($emailData);
+
+        return [
+            'email_id' => $emailId,
+            'processed_subject' => $processedSubject,
+            'processed_body' => $processedBody,
+            'test_email' => $testEmail,
+            'variables_used' => array_keys($mergeData)
+        ];
     }
 
     /**
