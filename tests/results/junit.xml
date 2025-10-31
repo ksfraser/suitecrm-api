@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="/home/kevin/Documents/ksfii_app/suiteAPI/tests/Services" tests="14" assertions="25" errors="0" warnings="0" failures="0" skipped="0" time="0.038985">
+    <testsuite name="SuiteAPI\Tests\Services\AccountServiceTest" file="/home/kevin/Documents/ksfii_app/suiteAPI/tests/Services/AccountServiceTest.php" tests="9" assertions="17" errors="0" warnings="0" failures="0" skipped="0" time="0.036837">
+      <testcase name="testCreateAccountSuccess" class="SuiteAPI\Tests\Services\AccountServiceTest" classname="SuiteAPI.Tests.Services.AccountServiceTest" file="/home/kevin/Documents/ksfii_app/suiteAPI/tests/Services/AccountServiceTest.php" line="49" assertions="2" time="0.032294"/>
+      <testcase name="testCreateAccountMissingRequiredField" class="SuiteAPI\Tests\Services\AccountServiceTest" classname="SuiteAPI.Tests.Services.AccountServiceTest" file="/home/kevin/Documents/ksfii_app/suiteAPI/tests/Services/AccountServiceTest.php" line="74" assertions="2" time="0.002534"/>
+      <testcase name="testCreateAccountInvalidAccountType" class="SuiteAPI\Tests\Services\AccountServiceTest" classname="SuiteAPI.Tests.Services.AccountServiceTest" file="/home/kevin/Documents/ksfii_app/suiteAPI/tests/Services/AccountServiceTest.php" line="89" assertions="2" time="0.000147"/>
+      <testcase name="testFindAccountById" class="SuiteAPI\Tests\Services\AccountServiceTest" classname="SuiteAPI.Tests.Services.AccountServiceTest" file="/home/kevin/Documents/ksfii_app/suiteAPI/tests/Services/AccountServiceTest.php" line="105" assertions="2" time="0.000177"/>
+      <testcase name="testFindAccountsByName" class="SuiteAPI\Tests\Services\AccountServiceTest" classname="SuiteAPI.Tests.Services.AccountServiceTest" file="/home/kevin/Documents/ksfii_app/suiteAPI/tests/Services/AccountServiceTest.php" line="126" assertions="2" time="0.000176"/>
+      <testcase name="testFindAccountsByType" class="SuiteAPI\Tests\Services\AccountServiceTest" classname="SuiteAPI.Tests.Services.AccountServiceTest" file="/home/kevin/Documents/ksfii_app/suiteAPI/tests/Services/AccountServiceTest.php" line="153" assertions="2" time="0.000156"/>
+      <testcase name="testDataPreprocessing" class="SuiteAPI\Tests\Services\AccountServiceTest" classname="SuiteAPI.Tests.Services.AccountServiceTest" file="/home/kevin/Documents/ksfii_app/suiteAPI/tests/Services/AccountServiceTest.php" line="180" assertions="1" time="0.000180"/>
+      <testcase name="testUpdateAccount" class="SuiteAPI\Tests\Services\AccountServiceTest" classname="SuiteAPI.Tests.Services.AccountServiceTest" file="/home/kevin/Documents/ksfii_app/suiteAPI/tests/Services/AccountServiceTest.php" line="203" assertions="2" time="0.000995"/>
+      <testcase name="testDeleteAccount" class="SuiteAPI\Tests\Services\AccountServiceTest" classname="SuiteAPI.Tests.Services.AccountServiceTest" file="/home/kevin/Documents/ksfii_app/suiteAPI/tests/Services/AccountServiceTest.php" line="224" assertions="2" time="0.000177"/>
+    </testsuite>
+    <testsuite name="SuiteAPI\Tests\Services\LeadServiceTest" file="/home/kevin/Documents/ksfii_app/suiteAPI/tests/Services/LeadServiceTest.php" tests="5" assertions="8" errors="0" warnings="0" failures="0" skipped="0" time="0.002148">
+      <testcase name="testCreateLeadSuccess" class="SuiteAPI\Tests\Services\LeadServiceTest" classname="SuiteAPI.Tests.Services.LeadServiceTest" file="/home/kevin/Documents/ksfii_app/suiteAPI/tests/Services/LeadServiceTest.php" line="50" assertions="2" time="0.001631"/>
+      <testcase name="testCreateLeadMissingRequiredField" class="SuiteAPI\Tests\Services\LeadServiceTest" classname="SuiteAPI.Tests.Services.LeadServiceTest" file="/home/kevin/Documents/ksfii_app/suiteAPI/tests/Services/LeadServiceTest.php" line="78" assertions="2" time="0.000118"/>
+      <testcase name="testFindLeadsByEmail" class="SuiteAPI\Tests\Services\LeadServiceTest" classname="SuiteAPI.Tests.Services.LeadServiceTest" file="/home/kevin/Documents/ksfii_app/suiteAPI/tests/Services/LeadServiceTest.php" line="93" assertions="2" time="0.000165"/>
+      <testcase name="testConvertToContact" class="SuiteAPI\Tests\Services\LeadServiceTest" classname="SuiteAPI.Tests.Services.LeadServiceTest" file="/home/kevin/Documents/ksfii_app/suiteAPI/tests/Services/LeadServiceTest.php" line="113" assertions="1" time="0.000090"/>
+      <testcase name="testDataPreprocessingPhoneFormatting" class="SuiteAPI\Tests\Services\LeadServiceTest" classname="SuiteAPI.Tests.Services.LeadServiceTest" file="/home/kevin/Documents/ksfii_app/suiteAPI/tests/Services/LeadServiceTest.php" line="127" assertions="1" time="0.000145"/>
+    </testsuite>
+  </testsuite>
+</testsuites>
