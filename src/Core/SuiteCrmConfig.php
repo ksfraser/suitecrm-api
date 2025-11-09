@@ -33,7 +33,7 @@
  * ```
  */
 
-namespace Ksfraser\Ksfraser\SuiteAPI\Core;
+namespace Ksfraser\SuiteAPI\Core;
 
 /**
  * SuiteCRM Configuration Class

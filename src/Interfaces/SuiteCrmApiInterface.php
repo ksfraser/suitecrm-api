@@ -37,7 +37,7 @@
  * ```
  */
 
-namespace Ksfraser\Ksfraser\SuiteAPI\Interfaces;
+namespace Ksfraser\SuiteAPI\Interfaces;
 
 /**
  * SuiteCRM API Interface

@@ -33,7 +33,7 @@
  * ```
  */
 
-namespace Ksfraser\Ksfraser\SuiteAPI\Interfaces;
+namespace Ksfraser\SuiteAPI\Interfaces;
 
 /**
  * HTTP Client Interface

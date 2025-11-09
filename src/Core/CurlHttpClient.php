@@ -31,7 +31,7 @@
  * ```
  */
 
-namespace Ksfraser\Ksfraser\SuiteAPI\Core;
+namespace Ksfraser\SuiteAPI\Core;
 
 use Ksfraser\SuiteAPI\Interfaces\HttpClientInterface;
 

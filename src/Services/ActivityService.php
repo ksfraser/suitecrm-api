@@ -35,7 +35,7 @@
  * ```
  */
 
-namespace Ksfraser\Ksfraser\SuiteAPI\Services;
+namespace Ksfraser\SuiteAPI\Services;
 
 use Ksfraser\SuiteAPI\Interfaces\SuiteCrmApiInterface;
 use Ksfraser\SuiteAPI\Exceptions\SuiteApiException;
