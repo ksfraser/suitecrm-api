@@ -10,7 +10,7 @@
  * @since 1.0.0
  */
 
-namespace SuiteAPI\Exceptions;
+namespace Ksfraser\Ksfraser\SuiteAPI\Exceptions;
 
 /**
  * Validation Exception

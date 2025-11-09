@@ -31,11 +31,11 @@
  * ```
  */
 
-namespace SuiteAPI\Core;
+namespace Ksfraser\Ksfraser\SuiteAPI\Core;
 
-use SuiteAPI\Interfaces\SuiteCrmApiInterface;
-use SuiteAPI\Interfaces\HttpClientInterface;
-use SuiteAPI\Services\ContactService;
+use Ksfraser\SuiteAPI\Interfaces\SuiteCrmApiInterface;
+use Ksfraser\SuiteAPI\Interfaces\HttpClientInterface;
+use Ksfraser\SuiteAPI\Services\ContactService;
 
 /**
  * SuiteCRM API Factory

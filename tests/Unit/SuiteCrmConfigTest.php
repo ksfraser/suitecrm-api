@@ -11,13 +11,13 @@
  * @since 1.0.0
  *
  * @requirement REQ-SUITE-014: Unit Testing
- * @covers SuiteAPI\Core\SuiteCrmConfig
+ * @covers Ksfraser\SuiteAPI\Core\SuiteCrmConfig
  */
 
-namespace SuiteAPI\Tests\Unit;
+namespace Ksfraser\SuiteAPI\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-use SuiteAPI\Core\SuiteCrmConfig;
+use Ksfraser\SuiteAPI\Core\SuiteCrmConfig;
 
 /**
  * SuiteCrmConfig Test Case

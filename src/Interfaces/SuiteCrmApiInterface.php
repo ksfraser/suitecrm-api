@@ -37,7 +37,7 @@
  * ```
  */
 
-namespace SuiteAPI\Interfaces;
+namespace Ksfraser\Ksfraser\SuiteAPI\Interfaces;
 
 /**
  * SuiteCRM API Interface
@@ -54,7 +54,7 @@ interface SuiteCrmApiInterface
      * @param string $username SuiteCRM username
      * @param string $password SuiteCRM password
      * @return bool True on successful authentication
-     * @throws SuiteAPI\Exceptions\AuthenticationException
+     * @throws Ksfraser\SuiteAPI\Exceptions\AuthenticationException
      *
      * @requirement REQ-SUITE-003
      */
@@ -75,7 +75,7 @@ interface SuiteCrmApiInterface
      * @param string $module Module name (e.g., 'Contacts', 'Accounts')
      * @param array $data Record data as key-value pairs
      * @return string|null Created record ID or null on failure
-     * @throws SuiteAPI\Exceptions\ApiException
+     * @throws Ksfraser\SuiteAPI\Exceptions\ApiException
      *
      * @requirement REQ-SUITE-002
      */
@@ -88,7 +88,7 @@ interface SuiteCrmApiInterface
      * @param string $id Record ID
      * @param array $data Updated data
      * @return bool True on successful update
-     * @throws SuiteAPI\Exceptions\ApiException
+     * @throws Ksfraser\SuiteAPI\Exceptions\ApiException
      *
      * @requirement REQ-SUITE-002
      */
@@ -101,7 +101,7 @@ interface SuiteCrmApiInterface
      * @param string $id Record ID
      * @param array $fields Optional fields to retrieve
      * @return array|null Record data or null if not found
-     * @throws SuiteAPI\Exceptions\ApiException
+     * @throws Ksfraser\SuiteAPI\Exceptions\ApiException
      *
      * @requirement REQ-SUITE-002
      */
@@ -116,7 +116,7 @@ interface SuiteCrmApiInterface
      * @param int $limit Maximum results
      * @param int $offset Result offset
      * @return array Array of matching records
-     * @throws SuiteAPI\Exceptions\ApiException
+     * @throws Ksfraser\SuiteAPI\Exceptions\ApiException
      *
      * @requirement REQ-SUITE-002
      */
@@ -134,7 +134,7 @@ interface SuiteCrmApiInterface
      * @param string $module Module name
      * @param string $id Record ID
      * @return bool True on successful deletion
-     * @throws SuiteAPI\Exceptions\ApiException
+     * @throws Ksfraser\SuiteAPI\Exceptions\ApiException
      *
      * @requirement REQ-SUITE-002
      */

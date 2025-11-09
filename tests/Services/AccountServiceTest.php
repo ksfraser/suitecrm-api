@@ -10,14 +10,14 @@
  * @since 1.0.0
  */
 
-namespace SuiteAPI\Tests\Services;
+namespace Ksfraser\SuiteAPI\Tests\Services;
 
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
-use SuiteAPI\Interfaces\SuiteCrmApiInterface;
-use SuiteAPI\Services\AccountService;
-use SuiteAPI\Exceptions\ValidationException;
-use SuiteAPI\Exceptions\SuiteApiException;
+use Ksfraser\SuiteAPI\Interfaces\SuiteCrmApiInterface;
+use Ksfraser\SuiteAPI\Services\AccountService;
+use Ksfraser\SuiteAPI\Exceptions\ValidationException;
+use Ksfraser\SuiteAPI\Exceptions\SuiteApiException;
 
 /**
  * Test cases for AccountService

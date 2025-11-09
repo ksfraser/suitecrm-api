@@ -39,11 +39,11 @@
  * ```
  */
 
-namespace SuiteAPI\Services;
+namespace Ksfraser\Ksfraser\SuiteAPI\Services;
 
-use SuiteAPI\Interfaces\SuiteCrmApiInterface;
-use SuiteAPI\Exceptions\SuiteApiException;
-use SuiteAPI\Exceptions\ValidationException;
+use Ksfraser\SuiteAPI\Interfaces\SuiteCrmApiInterface;
+use Ksfraser\SuiteAPI\Exceptions\SuiteApiException;
+use Ksfraser\SuiteAPI\Exceptions\ValidationException;
 
 /**
  * Campaigns Service
@@ -362,7 +362,7 @@ class CampaignsService extends BaseSuiteCrmService
             throw new ValidationException("Unsupported target type: {$targetType}");
         }
 
-        $serviceClass = 'SuiteAPI\\Services\\' . $serviceMap[$targetType];
+        $serviceClass = 'Ksfraser\SuiteAPI\\Services\\' . $serviceMap[$targetType];
         $service = new $serviceClass($this->api);
 
         foreach ($targetIds as $targetId) {

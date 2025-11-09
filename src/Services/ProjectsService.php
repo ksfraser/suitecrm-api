@@ -39,11 +39,11 @@
  * ```
  */
 
-namespace SuiteAPI\Services;
+namespace Ksfraser\Ksfraser\SuiteAPI\Services;
 
-use SuiteAPI\Interfaces\SuiteCrmApiInterface;
-use SuiteAPI\Exceptions\SuiteApiException;
-use SuiteAPI\Exceptions\ValidationException;
+use Ksfraser\SuiteAPI\Interfaces\SuiteCrmApiInterface;
+use Ksfraser\SuiteAPI\Exceptions\SuiteApiException;
+use Ksfraser\SuiteAPI\Exceptions\ValidationException;
 
 /**
  * Projects Service

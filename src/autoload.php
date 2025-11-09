@@ -20,12 +20,12 @@ define('SUITE_API_BASE_DIR', __DIR__ . '/src/');
 function suiteApiAutoloader(string $className): void
 {
     // Only handle SuiteAPI namespace
-    if (strpos($className, 'SuiteAPI\\') !== 0) {
+    if (strpos($className, 'Ksfraser\SuiteAPI\\') !== 0) {
         return;
     }
 
     // Remove namespace prefix
-    $relativeClass = substr($className, strlen('SuiteAPI\\'));
+    $relativeClass = substr($className, strlen('Ksfraser\SuiteAPI\\'));
 
     // Convert namespace separators to directory separators
     $filePath = SUITE_API_BASE_DIR . str_replace('\\', '/', $relativeClass) . '.php';
@@ -40,14 +40,14 @@ function suiteApiAutoloader(string $className): void
 spl_autoload_register('suiteApiAutoloader');
 
 // Optional: Define commonly used classes for easier access
-if (!class_exists('SuiteAPI\\Core\\SuiteCrmApiFactory', false)) {
+if (!class_exists('Ksfraser\SuiteAPI\\Core\\SuiteCrmApiFactory', false)) {
     require_once SUITE_API_BASE_DIR . 'Core/SuiteCrmApiFactory.php';
 }
 
-if (!class_exists('SuiteAPI\\Core\\SuiteCrmConfig', false)) {
+if (!class_exists('Ksfraser\SuiteAPI\\Core\\SuiteCrmConfig', false)) {
     require_once SUITE_API_BASE_DIR . 'Core/SuiteCrmConfig.php';
 }
 
-if (!class_exists('SuiteAPI\\Exceptions\\SuiteApiException', false)) {
+if (!class_exists('Ksfraser\SuiteAPI\\Exceptions\\SuiteApiException', false)) {
     require_once SUITE_API_BASE_DIR . 'Exceptions/SuiteApiExceptions.php';
 }

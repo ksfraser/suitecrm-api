@@ -35,15 +35,15 @@
  * ```
  */
 
-namespace SuiteAPI\Core;
+namespace Ksfraser\Ksfraser\SuiteAPI\Core;
 
-use SuiteAPI\Interfaces\SuiteCrmApiInterface;
-use SuiteAPI\Interfaces\HttpClientInterface;
-use SuiteAPI\Exceptions\SuiteApiException;
-use SuiteAPI\Exceptions\AuthenticationException;
-use SuiteAPI\Exceptions\ConnectionException;
-use SuiteAPI\Exceptions\ValidationException;
-use SuiteAPI\Exceptions\RecordNotFoundException;
+use Ksfraser\SuiteAPI\Interfaces\SuiteCrmApiInterface;
+use Ksfraser\SuiteAPI\Interfaces\HttpClientInterface;
+use Ksfraser\SuiteAPI\Exceptions\SuiteApiException;
+use Ksfraser\SuiteAPI\Exceptions\AuthenticationException;
+use Ksfraser\SuiteAPI\Exceptions\ConnectionException;
+use Ksfraser\SuiteAPI\Exceptions\ValidationException;
+use Ksfraser\SuiteAPI\Exceptions\RecordNotFoundException;
 
 /**
  * SuiteCRM REST API Implementation

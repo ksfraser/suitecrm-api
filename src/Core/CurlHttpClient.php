@@ -31,9 +31,9 @@
  * ```
  */
 
-namespace SuiteAPI\Core;
+namespace Ksfraser\Ksfraser\SuiteAPI\Core;
 
-use SuiteAPI\Interfaces\HttpClientInterface;
+use Ksfraser\SuiteAPI\Interfaces\HttpClientInterface;
 
 /**
  * cURL HTTP Client Implementation
